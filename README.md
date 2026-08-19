@@ -250,6 +250,30 @@ Future versions can include:
 ---
 
 ## 📸 Screenshots
+## 📸 Screenshots
+
+### 🏠 Main Menu
+
+![Smart Snake Main Menu](screenshots/01_main_menu.png)
+
+---
+
+### 🎮 Gameplay
+
+![Smart Snake Gameplay](screenshots/02_gameplay.png)
+
+---
+
+### 🏆 Leaderboard
+
+![Smart Snake Leaderboard](screenshots/03_leaderboard.png)
+
+---
+
+### 📊 Statistics
+
+![Smart Snake Statistics](screenshots/04_statistics.png)
+
 
 Screenshots of the game can be added here:
 
