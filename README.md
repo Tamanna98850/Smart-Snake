@@ -2,81 +2,121 @@
 
 ### Play. Analyze. Improve.
 
-**Smart Snake** is an interactive Snake Game developed using **Python and Pygame**, enhanced with **SQLite database storage, leaderboard, player statistics and data analytics**.
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Pygame](https://img.shields.io/badge/Pygame-2.x-green)
+![SQLite](https://img.shields.io/badge/Database-SQLite-orange)
+![Pandas](https://img.shields.io/badge/Analytics-Pandas-purple)
+![NumPy](https://img.shields.io/badge/NumPy-Data%20Processing-yellow)
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-red)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
+---
+
+## 📌 Project Overview
+
+**Smart Snake** is an interactive Python-based Snake Game that combines traditional game development with **database management and data analytics**.
+
+Unlike a basic Snake Game, Smart Snake records gameplay information, maintains player performance data, provides a leaderboard, generates analytics, and produces performance reports.
+
+The project demonstrates how **Python, Pygame, OOP, SQLite, Pandas, NumPy and Matplotlib** can work together in one complete application.
 
 ---
 
 ## 🎯 Project Objective
 
-The objective of Smart Snake is to combine game development with practical data-management and data-analysis concepts.
+The main objective of Smart Snake is to build an engaging game while demonstrating practical programming and data-analysis concepts.
 
-The project demonstrates:
+The project aims to:
 
-* Python programming
-* Object-Oriented Programming
-* Pygame
-* SQLite
-* Pandas
-* NumPy
-* Matplotlib
-* Data analysis
-* Player performance tracking
+* 🎮 Provide an interactive Snake Game
+* 🏆 Track player scores and rankings
+* 🗄️ Store game history using SQLite
+* 📊 Analyze player performance
+* 📈 Generate performance reports
+* 🔊 Provide sound effects
+* 🧩 Use Object-Oriented Programming
+* 📁 Maintain organized and modular project architecture
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
 ### 🎮 Gameplay
 
-* Snake movement
+* Classic Snake gameplay
+* Smooth snake movement
 * Food collection
-* Score system
-* Increasing levels
+* Score tracking
+* Snake length tracking
+* Level progression
 * Obstacles
 * Power-ups
 * Game Over system
-* Restart option
+* Restart functionality
 
 ### 🏆 Leaderboard
 
 * Player ranking
-* Best score
-* Player performance
-* Achievements
-* Game history
+* Best scores
+* Player names
+* Game performance tracking
+* Achievement support
 
-### 📊 Analytics
+### 📊 Analytics Dashboard
 
-* Total games
+Smart Snake stores gameplay data and uses it for analysis.
+
+Analytics can include:
+
+* Total games played
 * Highest score
 * Average score
-* Snake length
 * Player performance
+* Snake length
 * Level performance
-* Food-type analysis
-* Performance reports
+* Food-related statistics
+* Game history
+
+### 🗄️ Database
+
+SQLite is used to store game-related information.
+
+Stored information can include:
+
+* Player name
+* Score
+* Snake length
+* Level
+* Food information
+* Game results
+* Game history
 
 ### 🔊 Sound System
 
-* Food sound
-* Game-over sound
-* Start sound
-* Pause sound
-* Background/game sound support
+The project includes sound support for:
+
+* Food collection
+* Game start
+* Game pause
+* Game over
+* Additional game events
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Technology Stack
 
-| Technology | Purpose              |
-| ---------- | -------------------- |
-| Python     | Core programming     |
-| Pygame     | Game development     |
-| SQLite     | Database             |
-| Pandas     | Data analysis        |
-| NumPy      | Numerical processing |
-| Matplotlib | Visualization        |
-| OOP        | Modular architecture |
+| Technology     | Purpose                           |
+| -------------- | --------------------------------- |
+| **Python**     | Core programming language         |
+| **Pygame**     | Game development and graphics     |
+| **OOP**        | Modular and reusable architecture |
+| **SQLite**     | Game-history database             |
+| **Pandas**     | Data analysis                     |
+| **NumPy**      | Numerical processing              |
+| **Matplotlib** | Data visualization                |
+| **CSV**        | Performance reports               |
+| **Git**        | Version control                   |
+| **GitHub**     | Project hosting                   |
 
 ---
 
@@ -85,15 +125,17 @@ The project demonstrates:
 ```text
 Smart Snake/
 │
-├── main.py
-├── main_backup.py
-├── README.md
-├── requirements.txt
-├── game_history.db
-├── analytics_game_history.csv
-├── smart_snake_performance_report.csv
+├── database/
+│   ├── __init__.py
+│   ├── db.py
+│   │
+│   └── analytics/
+│       ├── achievements.py
+│       ├── analytics.py
+│       └── dashboard.py
 │
 ├── game/
+│   ├── __init__.py
 │   ├── game.py
 │   ├── snake.py
 │   ├── player.py
@@ -104,43 +146,50 @@ Smart Snake/
 │   ├── menu.py
 │   └── sound_manager.py
 │
-├── database/
-│   ├── db.py
-│   └── analytics/
-│       ├── achievements.py
-│       ├── analytics.py
-│       └── dashboard.py
+├── screenshots/
+│   ├── 01_main_menu.png
+│   ├── 02_gameplay.png
+│   ├── 03_leaderboard.png
+│   └── 04_statistics.png
 │
-└── sounds/
-    ├── food.wav
-    ├── game_over.wav
-    ├── pause.wav
-    └── start.wav
+├── sounds/
+│   ├── food.wav
+│   ├── game_over.wav
+│   ├── pause.wav
+│   └── start.wav
+│
+├── main.py
+├── main_backup.py
+├── README.md
+├── requirements.txt
+├── game_history.db
+├── analytics_game_history.csv
+└── smart_snake_performance_report.csv
 ```
 
 ---
 
-## ▶️ Installation
+## 🚀 Installation & Setup
 
-Clone the repository:
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Tamanna98850/Smart-Snake.git
 ```
 
-Move into the project folder:
+### 2. Open the Project
 
 ```bash
 cd Smart-Snake
 ```
 
-Install dependencies:
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the game:
+### 4. Run the Game
 
 ```bash
 python main.py
@@ -150,106 +199,22 @@ python main.py
 
 ## 🎮 Controls
 
-| Key   | Action              |
-| ----- | ------------------- |
-| ↑     | Move Up             |
-| ↓     | Move Down           |
-| ←     | Move Left           |
-| →     | Move Right          |
-| ENTER | Select Menu         |
-| ESC   | Return to Main Menu |
-| R     | Restart             |
-| M     | Toggle Sound        |
-| N     | Toggle Music        |
+| Key       | Action              |
+| --------- | ------------------- |
+| **↑**     | Move Up             |
+| **↓**     | Move Down           |
+| **←**     | Move Left           |
+| **→**     | Move Right          |
+| **ENTER** | Select Menu         |
+| **ESC**   | Return to Main Menu |
+| **R**     | Restart Game        |
+| **M**     | Toggle Sound        |
+| **N**     | Toggle Music        |
+
+> Controls may depend on the current implementation of the game modules.
 
 ---
 
-## 🗄️ Database
-
-Smart Snake uses SQLite for storing game history.
-
-### Database
-
-```text
-game_history.db
-```
-
-### Stored Information
-
-* Player name
-* Score
-* Snake length
-* Level
-* Food type
-* Game date
-
----
-
-## 📊 Data Analytics
-
-Game-history data can be processed using Pandas.
-
-```text
-SQLite Database
-       ↓
-Game History
-       ↓
-Pandas DataFrame
-       ↓
-Data Processing
-       ↓
-Statistics
-       ↓
-Reports / Charts
-```
-
----
-
-## 🏆 Leaderboard
-
-The leaderboard uses stored game data to calculate player rankings and best scores.
-
-Players can view their performance and achievements after playing.
-
----
-
-## 🧪 Testing
-
-The main project features have been tested, including:
-
-* Main Menu
-* Player Name Entry
-* Snake Movement
-* Food Collection
-* Score System
-* Power-Ups
-* Obstacles
-* Game Over
-* Restart
-* Main Menu Return
-* Leaderboard
-* Statistics
-* SQLite Storage
-* Application Exit
-
----
-
-## 🚀 Future Scope
-
-Future versions can include:
-
-* Multiplayer mode
-* Online leaderboard
-* Player profiles
-* More game modes
-* Advanced analytics dashboard
-* AI-based difficulty
-* Cloud database
-* Additional achievements
-
----
-
-## 📸 Screenshots
 ## 📸 Screenshots
 
 ### 🏠 Main Menu
@@ -274,29 +239,247 @@ Future versions can include:
 
 ![Smart Snake Statistics](screenshots/04_statistics.png)
 
+---
 
-Screenshots of the game can be added here:
+## 🗄️ Database Architecture
+
+Smart Snake uses **SQLite** to store gameplay information.
 
 ```text
-Main Menu
+Player
+   │
+   ▼
 Gameplay
-Leaderboard
-Statistics
-Game Over
+   │
+   ├── Score
+   ├── Level
+   ├── Snake Length
+   ├── Food Data
+   └── Game Result
+   │
+   ▼
+SQLite Database
+   │
+   ▼
+Game History
 ```
+
+The main database file is:
+
+```text
+game_history.db
+```
+
+---
+
+## 📊 Data Analytics Flow
+
+Gameplay data can be transformed into useful performance insights.
+
+```text
+Gameplay
+    ↓
+SQLite Database
+    ↓
+Game History
+    ↓
+Pandas DataFrame
+    ↓
+NumPy Processing
+    ↓
+Analytics
+    ↓
+Matplotlib Visualization
+    ↓
+Performance Reports
+```
+
+The project includes CSV-based analytics/report files:
+
+```text
+analytics_game_history.csv
+smart_snake_performance_report.csv
+```
+
+---
+
+## 🏆 Leaderboard System
+
+The leaderboard uses stored gameplay information to display player performance.
+
+It can help identify:
+
+* Highest-scoring players
+* Best game performances
+* Player rankings
+* Historical performance
+
+This makes the game more engaging while also demonstrating database-based ranking logic.
+
+---
+
+## 🧩 Object-Oriented Design
+
+The project uses Object-Oriented Programming to keep different game components organized.
+
+Important classes/modules include:
+
+```text
+Player
+Snake
+Food
+Obstacle
+PowerUp
+Game
+Leaderboard
+SoundManager
+Dashboard
+```
+
+This modular design makes the project easier to:
+
+* Understand
+* Test
+* Maintain
+* Extend
+* Debug
+
+---
+
+## 🧪 Testing
+
+The major features of Smart Snake have been tested.
+
+### Functional Testing
+
+* [x] Main Menu
+* [x] Player Name Entry
+* [x] Snake Movement
+* [x] Food Collection
+* [x] Score System
+* [x] Level System
+* [x] Obstacles
+* [x] Power-Ups
+* [x] Game Over
+* [x] Restart
+* [x] Main Menu Return
+* [x] Leaderboard
+* [x] Statistics
+* [x] SQLite Storage
+* [x] CSV Reports
+* [x] Sound System
+* [x] Application Exit
+
+---
+
+## 📈 Performance Reports
+
+Smart Snake can generate or maintain performance data in CSV format.
+
+Example report files:
+
+```text
+analytics_game_history.csv
+smart_snake_performance_report.csv
+```
+
+These files can be opened with:
+
+* Microsoft Excel
+* Google Sheets
+* Pandas
+* Other spreadsheet/data-analysis tools
+
+---
+
+## 🔮 Future Scope
+
+Future versions of Smart Snake can include:
+
+* 🌐 Online leaderboard
+* 👥 Multiplayer mode
+* 👤 Player profiles
+* ☁️ Cloud database
+* 🤖 AI-based difficulty adjustment
+* 🎯 Multiple game modes
+* 🏅 Advanced achievement system
+* 📊 Interactive analytics dashboard
+* 📱 Mobile version
+* 🌍 Online player statistics
+
+---
+
+## 💡 What This Project Demonstrates
+
+Smart Snake demonstrates practical knowledge of:
+
+```text
+Python
+   ↓
+Object-Oriented Programming
+   ↓
+Pygame
+   ↓
+SQLite
+   ↓
+Pandas + NumPy
+   ↓
+Data Analytics
+   ↓
+Matplotlib
+   ↓
+Git + GitHub
+```
+
+It is therefore both a **game-development project** and a **data-oriented Python project**.
+
+---
+
+## 📚 Learning Outcomes
+
+Through this project, the following concepts are demonstrated:
+
+* Python programming
+* OOP concepts
+* Classes and objects
+* Modular programming
+* Game loops
+* Event handling
+* Collision detection
+* Database operations
+* Data storage
+* Data analysis
+* Data visualization
+* CSV processing
+* Git version control
+* GitHub project management
 
 ---
 
 ## 👩‍💻 Developer
 
-**Developed By: Tamanna**
+### Tamanna
 
-### 🐍 Smart Snake
+**Project:** Smart Snake
 
-> **Play. Analyze. Improve.**
+**Category:** Python Game Development + Data Analytics
+
+**Technologies:** Python, Pygame, SQLite, Pandas, NumPy, Matplotlib
 
 ---
 
-## ⭐ Project
+## 📜 Project Motto
 
-If you find this project useful, you can give the repository a star ⭐
+> **"Play. Analyze. Improve."**
+
+---
+
+## ⭐ Support the Project
+
+If you find this project useful or interesting, consider giving the repository a ⭐ on GitHub.
+
+---
+
+## 📄 License
+
+This project is created for **educational and portfolio purposes**.
