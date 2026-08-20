@@ -148,7 +148,7 @@ class Leaderboard:
         )
 
         # ==================================
-        # TABLE HEADER
+        # TABLE HEADERS
         # ==================================
 
         rank_header = header_font.render(
@@ -185,7 +185,7 @@ class Leaderboard:
         )
 
         # ==================================
-        # LINE
+        # TABLE LINE
         # ==================================
 
         pygame.draw.line(
@@ -245,7 +245,7 @@ class Leaderboard:
                 rank = index + 1
 
                 # ==================================
-                # RANK COLOR
+                # RANK COLORS
                 # ==================================
 
                 if rank == 1:

@@ -4,10 +4,11 @@ from game.game import Game
 from game.player import Player
 from game.leaderboard import Leaderboard
 from database.analytics.dashboard import Dashboard
+from game.auth_screen import AuthScreen
 
 
 # =========================================================
-# PYGAME
+# PYGAME INITIALIZATION
 # =========================================================
 
 pygame.init()
@@ -43,9 +44,9 @@ small_font = pygame.font.Font(
     25
 )
 
-name_font = pygame.font.Font(
+user_font = pygame.font.Font(
     None,
-    40
+    24
 )
 
 
@@ -61,218 +62,17 @@ menu_options = [
 ]
 
 selected_option = 0
+
 running = True
 
 
 # =========================================================
-# NAME SCREEN
+# CURRENT USER
 # =========================================================
 
-def get_player_name():
+current_user = None
 
-    name = ""
-
-    entering = True
-
-    pygame.key.start_text_input()
-
-    while entering:
-
-        for event in pygame.event.get():
-
-            # ---------------------------------------------
-            # CLOSE
-            # ---------------------------------------------
-
-            if event.type == pygame.QUIT:
-
-                pygame.key.stop_text_input()
-
-                return None
-
-
-            # ---------------------------------------------
-            # TEXT INPUT
-            # ---------------------------------------------
-
-            elif event.type == pygame.TEXTINPUT:
-
-                if len(name) < 20:
-
-                    name += event.text
-
-
-            # ---------------------------------------------
-            # KEYBOARD
-            # ---------------------------------------------
-
-            elif event.type == pygame.KEYDOWN:
-
-                # ENTER
-                if event.key == pygame.K_RETURN:
-
-                    if name.strip() == "":
-
-                        name = "Player"
-
-                    entering = False
-
-
-                # BACKSPACE
-                elif event.key == pygame.K_BACKSPACE:
-
-                    name = name[:-1]
-
-
-                # ESC
-                elif event.key == pygame.K_ESCAPE:
-
-                    pygame.key.stop_text_input()
-
-                    return None
-
-
-        # ---------------------------------------------
-        # BACKGROUND
-        # ---------------------------------------------
-
-        screen.fill(
-            (15, 15, 25)
-        )
-
-
-        # ---------------------------------------------
-        # TITLE
-        # ---------------------------------------------
-
-        title = title_font.render(
-            "SMART SNAKE",
-            True,
-            (255, 215, 0)
-        )
-
-        screen.blit(
-            title,
-            title.get_rect(
-                center=(
-                    WIDTH // 2,
-                    120
-                )
-            )
-        )
-
-
-        # ---------------------------------------------
-        # HEADING
-        # ---------------------------------------------
-
-        heading = name_font.render(
-            "ENTER YOUR NAME",
-            True,
-            (255, 255, 255)
-        )
-
-        screen.blit(
-            heading,
-            heading.get_rect(
-                center=(
-                    WIDTH // 2,
-                    250
-                )
-            )
-        )
-
-
-        # ---------------------------------------------
-        # NAME BOX
-        # ---------------------------------------------
-
-        box = pygame.Rect(
-            200,
-            310,
-            400,
-            60
-        )
-
-        pygame.draw.rect(
-            screen,
-            (40, 40, 55),
-            box
-        )
-
-        pygame.draw.rect(
-            screen,
-            (255, 215, 0),
-            box,
-            2
-        )
-
-
-        # ---------------------------------------------
-        # NAME
-        # ---------------------------------------------
-
-        display_name = (
-            name
-            if name
-            else
-            "Type your name..."
-        )
-
-        text_color = (
-            (255, 255, 255)
-            if name
-            else
-            (120, 120, 120)
-        )
-
-        name_text = name_font.render(
-            display_name,
-            True,
-            text_color
-        )
-
-        screen.blit(
-            name_text,
-            name_text.get_rect(
-                midleft=(
-                    box.left + 15,
-                    box.centery
-                )
-            )
-        )
-
-
-        # ---------------------------------------------
-        # INSTRUCTION
-        # ---------------------------------------------
-
-        instruction = small_font.render(
-            "Type your name and press ENTER",
-            True,
-            (170, 170, 170)
-        )
-
-        screen.blit(
-            instruction,
-            instruction.get_rect(
-                center=(
-                    WIDTH // 2,
-                    420
-                )
-            )
-        )
-
-
-        # ---------------------------------------------
-        # UPDATE
-        # ---------------------------------------------
-
-        pygame.display.flip()
-
-    pygame.key.stop_text_input()
-
-    return name.strip()
+current_username = ""
 
 
 # =========================================================
@@ -303,6 +103,7 @@ def restore_menu():
 def open_menu(index):
 
     global running
+    global current_username
 
     choice = menu_options[index]
 
@@ -315,22 +116,36 @@ def open_menu(index):
 
         pygame.event.clear()
 
-        player_name = get_player_name()
+        # Use logged-in username
+        player_name = current_username
 
-        if player_name is None:
+        if not player_name:
+
+            print(
+                "No user logged in."
+            )
 
             return
 
+        print(
+            "Starting game for:",
+            player_name
+        )
+
+        # Create player
         player = Player(
             player_name
         )
 
+        # Create game
         game = Game(
             player
         )
 
+        # Run game
         game.run()
 
+        # Restore main menu
         restore_menu()
 
 
@@ -382,16 +197,77 @@ def open_menu(index):
 
 
 # =========================================================
-# MAIN LOOP
+# LOGIN / REGISTER
+# =========================================================
+
+auth_screen = AuthScreen(
+    screen
+)
+
+current_user = auth_screen.run()
+
+
+# =========================================================
+# LOGIN CANCELLED
+# =========================================================
+
+if current_user is None:
+
+    pygame.quit()
+
+    raise SystemExit
+
+
+# =========================================================
+# GET LOGGED-IN USERNAME
+# =========================================================
+
+try:
+
+    current_username = current_user[1]
+
+except (TypeError, IndexError):
+
+    current_username = str(
+        current_user
+    )
+
+
+print(
+    "================================"
+)
+
+print(
+    "Login successful!"
+)
+
+print(
+    "Logged in user:",
+    current_username
+)
+
+print(
+    "================================"
+)
+
+
+# Clear old login events
+pygame.event.clear()
+
+
+# =========================================================
+# MAIN MENU LOOP
 # =========================================================
 
 while running:
+
 
     # =====================================================
     # EVENTS
     # =====================================================
 
     for event in pygame.event.get():
+
 
         # -------------------------------------------------
         # WINDOW CLOSE
@@ -410,7 +286,11 @@ while running:
 
         if event.type == pygame.KEYDOWN:
 
+
+            # ---------------------------------------------
             # UP
+            # ---------------------------------------------
+
             if event.key == pygame.K_UP:
 
                 selected_option -= 1
@@ -422,7 +302,10 @@ while running:
                     )
 
 
+            # ---------------------------------------------
             # DOWN
+            # ---------------------------------------------
+
             elif event.key == pygame.K_DOWN:
 
                 selected_option += 1
@@ -434,12 +317,25 @@ while running:
                     selected_option = 0
 
 
+            # ---------------------------------------------
             # ENTER
+            # ---------------------------------------------
+
             elif event.key == pygame.K_RETURN:
 
                 open_menu(
                     selected_option
                 )
+
+
+            # ---------------------------------------------
+            # ESC
+            # ---------------------------------------------
+
+            elif event.key == pygame.K_ESCAPE:
+
+                # Exit application from main menu
+                running = False
 
 
         # -------------------------------------------------
@@ -454,6 +350,7 @@ while running:
 
                 start_y = 210
 
+
                 for index in range(
                     len(menu_options)
                 ):
@@ -464,6 +361,7 @@ while running:
                         300,
                         50
                     )
+
 
                     if option_rect.collidepoint(
                         mouse_position
@@ -488,6 +386,7 @@ while running:
 
             start_y = 210
 
+
             for index in range(
                 len(menu_options)
             ):
@@ -498,6 +397,7 @@ while running:
                     300,
                     50
                 )
+
 
                 if option_rect.collidepoint(
                     mouse_position
@@ -530,7 +430,28 @@ while running:
         title.get_rect(
             center=(
                 WIDTH // 2,
-                100
+                90
+            )
+        )
+    )
+
+
+    # =====================================================
+    # LOGGED-IN USER
+    # =====================================================
+
+    user_text = user_font.render(
+        f"Welcome, {current_username}",
+        True,
+        (180, 180, 180)
+    )
+
+    screen.blit(
+        user_text,
+        user_text.get_rect(
+            center=(
+                WIDTH // 2,
+                155
             )
         )
     )
@@ -540,15 +461,16 @@ while running:
     # MENU OPTIONS
     # =====================================================
 
-    start_y = 210
+    start_y = 220
 
 
     for index, option in enumerate(
         menu_options
     ):
 
+
         # -------------------------------------------------
-        # SELECTED
+        # SELECTED OPTION
         # -------------------------------------------------
 
         if index == selected_option:
@@ -565,6 +487,7 @@ while running:
                 + " <"
             )
 
+
         else:
 
             color = (
@@ -577,7 +500,7 @@ while running:
 
 
         # -------------------------------------------------
-        # RENDER
+        # RENDER OPTION
         # -------------------------------------------------
 
         option_text = menu_font.render(
@@ -586,12 +509,14 @@ while running:
             color
         )
 
+
         option_rect = option_text.get_rect(
             center=(
                 WIDTH // 2,
                 start_y + index * 65
             )
         )
+
 
         screen.blit(
             option_text,
@@ -600,7 +525,7 @@ while running:
 
 
     # =====================================================
-    # HELP
+    # HELP TEXT
     # =====================================================
 
     help_text = small_font.render(
